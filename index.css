@@ -1,0 +1,353 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #f4f4f4;
+  }
+
+
+
+
+
+
+/* 
+  =========================   ESTILOS PARA EL HEADER   =========================
+*/
+
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(1);
+  background-color: rebeccapurple;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.header h1 {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.header h1:hover {
+  color: #ff6f61;
+}
+
+/* 
+  =========================   ESTILOS PARA EL HEADER   =========================
+*/
+
+
+/* 
+  =========================   ESTILOS PARA EL CONTENEDOR  =========================
+*/
+
+#contenedorAbuelo {
+  width: 95%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "titulo titulo titulo"
+                       "contPadre contPadre carrito"
+                       "contPadre contPadre .";
+
+}
+
+#contenedorAbuelo .titulo {
+  text-align: center;
+  grid-area: titulo;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+#contenedorAbuelo #contenedorPadre {
+  grid-area: contPadre; 
+}
+
+#contenedorAbuelo #carrito {
+  grid-area: carrito;
+  margin-left: 20px;
+  min-height: 200px;
+  
+}
+
+
+
+
+#contenedorPadre {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(10, auto);
+  
+}
+
+#contenedorPadre .contenedoresHijos {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+#contenedorPadre .contenedoresHijos:hover {
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+#contenedorPadre .contenedoresHijos img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+#contenedorPadre .contenedoresHijos:hover img {
+  transform: scale(1.1);
+}
+
+#contenedorPadre .info-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.369);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+#contenedorPadre .contenedoresHijos:hover .info-card {
+  opacity: 1;
+}
+
+#contenedorPadre .info-card .nombre-producto {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+#contenedorPadre .info-card .precio {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#contenedorPadre .info-card .comprar {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#contenedorPadre .info-card .comprar:hover {
+  background-color: #ff6f61;
+}
+
+
+
+
+#carrito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.carritoImg  {
+  position: relative;
+  max-width: 100%;
+}
+
+.carritoImg img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+}
+
+.carritoImg h5 {
+  position: absolute;
+  top: 29%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  padding-top: 2%;
+  border-radius: 50%;
+  font-size: 2vw;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#lista-carrito {
+  margin-bottom: 30px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#lista-carrito th, #lista-carrito td {
+  padding: 12px;
+  text-align: left;
+}
+
+
+#lista-carrito th {
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+}
+
+#lista-carrito td {
+  border-bottom: 1px solid #ddd;
+}
+
+#lista-carrito .ult {
+  width: 30px;
+}
+
+#lista-carrito .imagen-carrito {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+#total {
+  margin-bottom: 20px;
+}
+
+#total th {
+  padding: 0 20px;
+  font-size: 30px;
+  text-align: right;
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#carrito .borrar-juego {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #f00;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  position: relative;
+  text-decoration: none;
+}
+
+#vaciar-carrito {
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 20px;
+  width: 200px;
+}
+
+#vaciar-carrito:hover {
+  background-color: #ff5a52;
+}
+
+#contenedorPadre .info-card .comprar:hover {
+  background-color: #c70303;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 1198px){
+  #contenedorAbuelo {
+    grid-template-areas: "titulo titulo titulo"
+                         "contPadre contPadre contPadre"
+                         "carrito carrito carrito";
+  
+  }
+  #contenedorPadre {
+    grid-template-rows: repeat(2, auto);
+    
+  }
+
+  #contenedorPadre .contenedoresHijos img{
+    height: 150px;
+  }
+
+  #carrito {
+    margin-top: 30px;
+  }
+
+}
+
+
+@media screen and (max-width: 568px){
+  #contenedorAbuelo {
+    grid-template-areas: "titulo titulo titulo"
+                         "contPadre contPadre contPadre"
+                         "carrito carrito carrito";              
+  
+  }
+
+  #contenedorPadre {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+  }
+
+  #contenedorPadre .contenedoresHijos img{
+    height: 250px;
+  }
+
+  
+#carrito #lista-carrito thead tr th {
+padding: 15px;
+
+
+}
+
+#carrito #lista-carrito tbody tr td img{
+  width: 90px;
+}
+
+#carrito .borrar-juego {
+  padding: 5px 10px;
+  margin-right: 40px;
+}
+
+
+
+
+}
