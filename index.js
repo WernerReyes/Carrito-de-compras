@@ -5,15 +5,14 @@ const contenedorAbuelo = document.querySelector("#contenedorAbuelo");
 
 let  precioTotal = document.querySelector(".precioTotal");
 let  cantidadTotal = document.querySelector(".cantidadTotal");
-let precioT = 0;
 let cont = 0;
 
 
 let articulosCarrito = [];
+const precios = [];
 
 cargarEventosListerners();
 function cargarEventosListerners() {
-
    // Agregando juegos
     contenedorAbuelo.addEventListener("click", agregarJuegos);
    
@@ -24,13 +23,11 @@ function cargarEventosListerners() {
    vaciarCarrritoBtn.addEventListener("click", () => {
     articulosCarrito = []; // Reseteamos el carrito
     
-    precioT = 0; // Reiniciamos la suma
+    
     cont = 0;
-    cantidadTotal.textContent = 0;
+    precioTotal.textContent = `$${0}`;
 
-    limpiarHTML(); // Eliminamos todo el HTML
-
-   
+    limpiarHTML(); // Eliminamos todo el HTML  
     
    })
 }
@@ -43,11 +40,25 @@ function agregarJuegos(e) {
       const juegoSeleccionado = e.target.parentElement.parentElement;
 
       leerDatosJuegos(juegoSeleccionado);
+
       cont++;
       cantidadTotal.textContent = cont;
+
+      totalPagar();
     }
-    precioTotal.innerHTML = `$${precioT}`;
+   
 }
+
+
+function totalPagar() {
+    const suma = articulosCarrito.reduce((acum,juego) => { 
+    const total = acum + (parseInt(juego.precio.replace("$",""))*juego.cantidad);
+    return total;
+    }, 0);
+    precioTotal.textContent = `$${suma}`;
+    return suma;
+}
+
 
 function eliminarJuego(e){
     if(e.target.classList.contains("borrar-juego")){
@@ -58,21 +69,13 @@ function eliminarJuego(e){
        const juegoIndex = articulosCarrito.findIndex( juego => juego.id === juegoId);
        const juego = articulosCarrito[juegoIndex];
        
-       let acum = 0 
-       acum += parseInt(juego.precio.replace("$",""));
+       let precioTotalActual = totalPagar();
+       precioTotalActual -= (parseInt(juego.precio.replace("$",""))*juego.cantidad);
        cont -= juego.cantidad;
-       
-       precioT = acum*cont;
-
-       precioTotal.textContent = precioT;
+      
+       precioTotal.textContent = `$${precioTotalActual}`;
        cantidadTotal.textContent = cont;
        
-       
-       if(articulosCarrito.length === 1){
-          carrito.firstElementChild.style.boxShadow = "";
-       } // Si el articulo es igual a 1 se elimina el borde
-
-
        articulosCarrito.splice(juegoIndex, 1);
 
        carritoHTMl() // Volvemos a iterar sobre el carrito y mostramos el HTML
@@ -82,7 +85,7 @@ function eliminarJuego(e){
 
 
 function leerDatosJuegos(juego) {
-  // console.log(juego)
+
 
   // Creamos un objeto con el contenido actual
   const infoJuego =  {
@@ -101,7 +104,6 @@ function leerDatosJuegos(juego) {
     const juegos = articulosCarrito.map (juego => {
         if(juego.id === infoJuego.id) {
             juego.cantidad++;
-            precioT += parseInt(juego.precio.replace("$",""));
             return juego; // Retorna el objeto actualizado
         }
         return juego; // Retorna el objeto no duplicado
@@ -110,7 +112,6 @@ function leerDatosJuegos(juego) {
     articulosCarrito = [...juegos];
 
   } else {
-    precioT += parseInt(infoJuego.precio.replace("$",""));
     // Agregamos elementos al arreglo de carrito
     articulosCarrito = [...articulosCarrito, infoJuego];
   }
@@ -130,10 +131,11 @@ articulosCarrito.forEach( juego => {
 
     const {imagen, titulo, precio, cantidad, id} = juego;
     const row = document.createElement("TR");
+    row.classList.add("fila")
     row.innerHTML = `
     <td> <img src="${imagen}" width="150"> </td>
     <td> ${titulo} </td>
-    <td> ${precio} </td>
+    <td id="precio"> ${precio} </td>
     <td> ${cantidad} </td>
     <td> <a href="#" class="borrar-juego" data-id="${id}"> X </a> </td>
     `;

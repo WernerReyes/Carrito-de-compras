@@ -288,9 +288,6 @@
 
 
 
-
-
-
 @media screen and (max-width: 1198px){
   #contenedorAbuelo {
     grid-template-areas: "titulo titulo titulo"
@@ -339,7 +336,7 @@ padding: 15px;
 }
 
 #carrito #lista-carrito tbody tr td img{
-  width: 90px;
+  width: 80px;
 }
 
 #carrito .borrar-juego {
@@ -348,6 +345,43 @@ padding: 15px;
 }
 
 
+}
+
+
+@media screen and (max-width: 468px){
+
+  
+ 
+  #lista-carrito {
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+#lista-carrito th {
+  font-size: 13px;
+  border-bottom: none;
+}
+
+#lista-carrito td {
+    font-size: 16px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-bottom: none;
+}
+
+#total {
+  margin-bottom: 20px;
+}
+
+#total th {
+  padding: 0 20px;
+  font-size: 30px;
+  text-align: right;
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 
 }
+
